@@ -6,6 +6,7 @@ import { useRouter } from 'next/router'
 import BackgroundParticles from '@/components/BackgroundParticles/BackgroundParticles'
 import { userAuth } from '@/api'
 import Cookies from 'cookies-js'
+import ForgotPassword from '@/components/ForgetPass/ForgotPass'
 
 
 
@@ -97,9 +98,11 @@ export interface authData {
                     Войти
                 </Button>
                 <span>
-                    Нету аккаунта? Тогда <Link href="/auth/register">зарегистрируйтесь</Link>
+                    Нету аккаунта? Тогда <Link  className={styles.forget} href="/auth/register">зарегистрируйтесь</Link>
                 </span>
-                <span>забыли</span>
+                <span className={styles.forget}>
+                    <ForgotPassword/>
+                    </span>
                 <span className={styles.err}>
                     {errors}
                 </span>
