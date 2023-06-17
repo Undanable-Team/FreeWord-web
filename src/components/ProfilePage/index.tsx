@@ -3,7 +3,8 @@ import styles from "./profile.module.sass";
 import Image from "next/image";
 import { FaRegEdit } from "react-icons/fa";
 import { useState } from "react";
-import Complaints from "./Complaints";
+
+import ComplaintsBlog from "./ComplaintsBlog";
 
 const ProfileUser = () => {
   const [input, setInput] = useState<boolean>(false);
@@ -83,7 +84,7 @@ const ProfileUser = () => {
           </div>
         </div>
       </div>
-      <Complaints />
+      <ComplaintsBlog />
     </Container>
   );
 };

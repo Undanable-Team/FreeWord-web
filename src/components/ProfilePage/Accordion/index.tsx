@@ -1,24 +1,26 @@
+import React from "react";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
-import styles from "./complaints.module.sass";
-
-export const Complaints = () => {
+const AccordionComplaints = () => {
   return (
-    <div className={styles.wrapper}>
+    <div>
       <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography>Жалобы #1</Typography>
+          <Typography>Жалобы 1</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>Ни воды, ни света!!! Что за хуйня?</Typography>
+          <Typography>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+            malesuada lacus ex, sit amet blandit leo lobortis eget.
+          </Typography>
         </AccordionDetails>
       </Accordion>
       <Accordion>
@@ -27,10 +29,13 @@ export const Complaints = () => {
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
-          <Typography>Жалобы #2</Typography>
+          <Typography>Жалобы 2</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>Уберите этих кыкенов нахуй</Typography>
+          <Typography>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+            malesuada lacus ex, sit amet blandit leo lobortis eget.
+          </Typography>
         </AccordionDetails>
       </Accordion>
       <Accordion disabled>
@@ -46,4 +51,4 @@ export const Complaints = () => {
   );
 };
 
-export default Complaints;
+export default AccordionComplaints;
