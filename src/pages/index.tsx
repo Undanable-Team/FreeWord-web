@@ -2,7 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { Ubuntu } from "next/font/google";
 import MainPage from "@/container/Home";
-import { Authh } from "./Authh";
+import { Auth } from "./Auth";
 
 const ubuntu = Ubuntu({ subsets: ["latin"], weight: ["300", "400", "700"] });
 
@@ -16,8 +16,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={ubuntu.className}>
-    
-        <Authh/>
+        <Auth/>
       </main>
     </>
   );

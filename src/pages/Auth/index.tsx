@@ -1,7 +1,7 @@
 import AuthReg from '@/container/AuthReg/AuthReg'
 import React from 'react'
 
-export const Authh = () => {
+export const Auth = () => {
   return (
     <div><AuthReg/></div>
   )
