@@ -3,7 +3,7 @@ import News from "@/container/News";
 const NewsPage = () => {
   return (
     <div>
-      <News></News>
+      <News />
     </div>
   );
 };
