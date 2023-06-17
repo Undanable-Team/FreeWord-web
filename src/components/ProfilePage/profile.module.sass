@@ -1,0 +1,62 @@
+.title_profile
+  position: relative
+  text-align: center
+  font-weight: 500
+  font-size: 24px
+
+.data_user
+  display: flex
+  gap: 45px
+  max-width: max-content
+
+.user_img_blog
+  position: relative
+  &:hover  .hover_blog
+    visibility: visible
+    opacity: 1
+    transform: translate(-50%, 0)
+
+.user_picture
+  // overflow: hidden
+  border-radius: 170px
+  cursor: pointer
+
+.hover_blog
+  display: flex
+  position: absolute
+  align-items: center
+  gap: 10px
+  left: 50%
+  background: #353797
+  // opacity: 0
+  overflow: hidden
+  text-align: center
+  visibility: hidden
+  opacity: 0
+  transition: .2s
+  transform: translate(-50%, -60px)
+  cursor: pointer
+  border: none
+  outline: none
+  padding: 4px 12px
+  color: #fff
+
+  &:hover
+    visibility: visible
+    opacity: 1
+    transform: translate(-50%, 0)
+
+  .icon_edit
+    color: #fff
+    font-size: 24px
+
+.input_data_group
+  display: flex
+  flex-direction: column
+  gap: 25px
+
+.input
+  &_group
+    display: flex
+    gap: 25px
+  
