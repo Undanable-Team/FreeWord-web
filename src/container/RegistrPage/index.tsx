@@ -1,8 +1,12 @@
+import { Container } from '@mui/material'
 import React from 'react'
-
+import styles from './regist.module.scss'
 const RegistrPage = () => {
   return (
-    <div>RegistrPage</div>
+  <div className={styles.conteiner}>
+
+  </div>
+
   )
 }
 

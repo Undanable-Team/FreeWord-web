@@ -4,6 +4,7 @@ import { Ubuntu } from "next/font/google";
 import MainPage from "@/container/Home";
 import Registr from "./Registr";
 
+
 const ubuntu = Ubuntu({ subsets: ["latin"], weight: ["300", "400", "700"] });
 
 export default function Home() {
@@ -16,8 +17,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={ubuntu.className}>
-       
-        <Registr/>
+        <Registr />
       </main>
     </>
   );
