@@ -5,7 +5,7 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head />
-      <body>
+      <body style={{ boxSizing: "border-box", padding: "0px", margin: "0px" }}>
         <Layout>
           <Main />
           <NextScript />

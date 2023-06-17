@@ -2,6 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { Ubuntu } from "next/font/google";
 import MainPage from "@/container/Home";
+import NewsPage from "./news-page";
 
 const ubuntu = Ubuntu({ subsets: ["latin"], weight: ["300", "400", "700"] });
 
