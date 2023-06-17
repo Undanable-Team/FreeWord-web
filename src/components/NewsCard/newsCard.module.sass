@@ -2,6 +2,8 @@
     position: relative
     border-radius: 12px
     max-width: 300px
+    color: white
+    cursor: pointer
 
     & img
         object-fit: cover
@@ -11,9 +13,6 @@
     &Main
         position: absolute
         width: 100%
-        display: flex
-        align-items: flex-end
-        justify-content: space-between
         box-sizing: border-box
         padding: 15px 20px
         bottom: 0
@@ -27,8 +26,19 @@
             cursor: pointer
     &Title
         margin: 0
-        font-size: 18px
+        font-size: 24px
         font-weight: 400
         max-width: 150px
         max-height: 150px
         color: white
+
+.newsInfo
+    display: flex
+    gap: 20px
+    margin-top: 20px
+
+.dateWrap,
+.viewsWrap
+    display: flex
+    align-items: center
+    gap: 5px
