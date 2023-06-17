@@ -16,25 +16,29 @@ import { PostRegistr } from "@/api";
 // import Cookie from 'js-cookie'
 
 export interface registerData {
-  // firstname: string;
-  // lastname: string;
+  firsname: string;
+  lastname: string;
   username: string;
   email: string;
   password: string;
+  phone: number;
+  ages: number;
 }
 
 const RegisterPage = () => {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState<boolean>(false);
-
+  const [err, setErr] = useState<string>("");
   const [confirmPass, setConfirmPass] = useState<string>("");
 
   const [user, setUser] = useState<registerData>({
-    // firstname: "",
-    // lastname: "",
+    firsname: "",
+    lastname: "",
     username: "",
     email: "",
     password: "",
+    phone: 0,
+    ages: 0,
   });
 
   const [regSubmit, setRegSubmit] = useState<boolean>(false);
@@ -70,16 +74,21 @@ const RegisterPage = () => {
     //     Cookie.set('token', resp.jwt, { expires: 7 })
     // })
 
-   const postData = await PostRegistr(user)
-
- console.log(postData)
-  };
-  const click = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    router.push("/Test");
-
     const togglePasswordVisibility = () => {
       setShowPassword(!showPassword);
     };
+
+    const postData = await PostRegistr(user)
+      .then(() => router.push("/Test"))
+      .catch((err) => {
+        if (err.message.indexOf("400")) {
+         setErr('такие данные уже существуют')
+        } else if (err.message.indexOf("500")) {
+          setErr("сервер времено не доступен")
+        }
+      });
+
+    console.log(postData);
   };
 
   return (
@@ -88,11 +97,11 @@ const RegisterPage = () => {
         <h2 className={styles["form-title"]}>Регистрация</h2>
         <div className={styles["form-content"]}>
           <Box sx={{ display: "flex", gap: 2 }}>
-            {/* <TextField
+            <TextField
               id="outlined-basic"
               label="Имя"
               variant="outlined"
-              name="firstname"
+              name="firsname"
               required
               onChange={change}
             />
@@ -103,7 +112,26 @@ const RegisterPage = () => {
               name="lastname"
               required
               onChange={change}
-            /> */}
+            />
+          </Box>
+          <Box sx={{ display: "flex", gap: 2 }}>
+            <TextField
+              id="outlined-basic"
+              label="возрост"
+              variant="outlined"
+              name="ages"
+              required
+              type="number"
+              onChange={change}
+            />
+            <TextField
+              id="outlined-basic"
+              label="номер телефона"
+              variant="outlined"
+              name="phone"
+              required
+              onChange={change}
+            />
           </Box>
           <TextField
             id="outlined-basic"
@@ -144,7 +172,6 @@ const RegisterPage = () => {
               }
               name="confirmPassword"
             />
-      
           </Box>
           <FormControlLabel
             control={<Checkbox />}
@@ -157,11 +184,12 @@ const RegisterPage = () => {
           <Button
             variant="contained"
             type="submit"
-            onClick={click}
+            // onClick={click}
             disabled={!regSubmit}
           >
             Создать аккаунт
           </Button>
+          <span className={styles.spann}>{err}</span>
           <span className={styles.spann}>
             Есть аккаунт? Тогда <Link href={"/Auth"}>авторизуйтесь</Link>
           </span>
