@@ -2,33 +2,30 @@
 .News
   background: white
   width: 100%
-  height: 100vh
   display: flex
+  justify-content: center
+  align-items: center
   padding: 20px
   flex-direction: column
+  flex-wrap: nowrap
   &__div
-    position: relative
-    left: 410px
+    display: flex
     &__title
       font-family: 'Ubuntu'
       font-style: normal
       font-weight: 700
       font-size: 42px
       line-height: 25px
+      max-width: max-content
+      padding: 5px
       color: #023047
-    &__underline
-      margin-top: -20px
-      border: 3px solid #000000
-      width: 128.02px
-      margin-right: auto
-      position: absolute
-      left: 0
-
+      border-bottom: 3px solid #000000
   &__btns
     display: flex
     flex-direction: row
     justify-content: center
     align-items: center
+    flex-wrap: wrap
     padding: 25px
     gap: 50px
     background: rgba(255, 255, 255, 0.28)
@@ -59,8 +56,13 @@
       &:hover
         background: #023047
         color: white
+  &__cards
+    display: grid
+    grid-template-columns: 2fr 3fr 2fr
+    grid-template-rows: repeat(3, 1fr)
+    grid-column-gap: 20px
+    grid-row-gap: 20px
   &__card
-    max-width: 287px
     &__bg
     &__info
       &__btn
@@ -69,3 +71,47 @@
         padding: 15px 32px
         background: #219EBC
         border-radius: 12px
+  &__added
+    position: fixed
+    right: 100px
+    bottom: 100px
+    &__modal
+      position: absolute
+      top: -4.8rem
+      left: -9.8rem
+      z-index: 0
+      display: flex
+      flex-direction: column
+      background: #00aaff
+      padding: 5px
+      border-radius: 0px 15px 15px 10px
+      &__btn
+        padding: 10px
+        color: white
+        font-family: 'Ubuntu'
+        font-style: normal
+        font-weight: 400
+        font-size: 16px
+        line-height: 25px
+        text-transform: capitalize
+.plus
+  &__btn
+    font-family: 'Ubuntu'
+    font-style: normal
+    font-weight: 400
+    font-size: 30px
+    line-height: 25px
+    display: flex
+    justify-content: center
+    align-content: center
+    color: white
+    text-align: center
+    background: #023047
+    padding: 20px 25px
+    border-radius: 100%
+    flex-wrap: wrap
+
+    &:hover
+      background-color: #00aaff
+  &__active
+    background: #00aaff
