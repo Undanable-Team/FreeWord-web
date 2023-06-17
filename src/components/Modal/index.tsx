@@ -3,38 +3,57 @@ import * as React from "react";
 import InputLabel from "@mui/material/InputLabel";
 import { FilledInput } from "@mui/material";
 import FormControl from "@mui/material/FormControl";
-import { ReactNode } from "react";
+import { ReactNode, ChangeEvent, FormEvent } from "react";
 import style from "./style.module.sass";
 import Image from "next/image";
+import { sendReport, uploadFile } from "@/api";
 
 interface ModalProps {
   children: ReactNode;
 }
 
 const Modal: React.FC<ModalProps> = ({ children }) => {
-  const [category, setCategory] = React.useState("");
-  const [reports, setReports] = React.useState("");
+  const [category, setCategory] = React.useState<string>("");
+  const [reports, setReports] = React.useState<string>("");
   const [file, setFile] = React.useState<File | null>(null);
-  const [subject, setSubject] = React.useState("");
+  const [description, setDescription] = React.useState<string>("");
 
-  const handleReportsChange = (
-    event: React.ChangeEvent<HTMLTextAreaElement>
-  ) => {
+  const handleReportsChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setReports(event.target.value);
   };
-  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+
+  const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
     setCategory(event.target.value);
   };
-  const handleSubjectChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSubject(event.target.value);
+
+  const handleSubjectChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setDescription(event.target.value);
   };
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+
+  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const selectedFile = event.target.files && event.target.files[0];
     setFile(selectedFile);
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    if (!file) {
+      // Handle error condition, file is required
+      return;
+    }
+
+    const form = new FormData();
+    form.append("files", file);
+
+    uploadFile(form).then((resp: any) =>
+      sendReport({
+        category,
+        reports,
+        description,
+        media: resp[0],
+      })
+    );
   };
 
   return (
@@ -65,7 +84,7 @@ const Modal: React.FC<ModalProps> = ({ children }) => {
             <Input
               id="my-input"
               aria-describedby="my-helper-text"
-              value={subject}
+              value={description}
               onChange={handleSubjectChange}
             />
             <FormHelperText id="my-helper-text">Пример:[dasd]</FormHelperText>
