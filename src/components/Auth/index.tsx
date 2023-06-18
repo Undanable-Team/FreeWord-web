@@ -87,7 +87,12 @@ const AuthPage = () => {
             required
             onChange={change}
           />
-          <Button variant="contained" type="submit" disabled={loginSubmit}>
+          <Button
+            className={styles.btn}
+            variant="contained"
+            type="submit"
+            disabled={loginSubmit}
+          >
             Войти
           </Button>
           <span>
@@ -97,7 +102,7 @@ const AuthPage = () => {
             </Link>
           </span>
           <span className={styles.forget}></span>
-          <span className={styles.err}>{errors}</span>
+          {errors && <span className={styles.err}>{errors}</span>}
         </div>
       </form>
     </div>

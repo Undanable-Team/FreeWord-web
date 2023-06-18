@@ -191,7 +191,7 @@ const RegisterPage = () => {
           >
             Создать аккаунт
           </Button>
-          <span className={styles.spann}>{err}</span>
+          {err && <span className={styles.err}>{err}</span>}
           <span className={styles.spann}>
             Есть аккаунт? Тогда <Link href={"/Auth"}>авторизуйтесь</Link>
           </span>
