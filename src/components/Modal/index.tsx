@@ -1,22 +1,31 @@
-import { Button, FormHelperText, Input, NativeSelect } from "@mui/material";
-import * as React from "react";
-import InputLabel from "@mui/material/InputLabel";
-import { FilledInput } from "@mui/material";
-import FormControl from "@mui/material/FormControl";
-import { ReactNode, ChangeEvent, FormEvent } from "react";
+import React, { ChangeEvent, FormEvent, ReactNode, useState } from "react";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  FilledInput,
+  FormControl,
+  FormHelperText,
+  Input,
+  InputLabel,
+  NativeSelect,
+} from "@mui/material";
 import style from "./style.module.sass";
 import Image from "next/image";
-import { sendReport, uploadFile } from "@/api";
 
 interface ModalProps {
-  children: ReactNode;
+  children: ReactNode | string;
+  onClose: () => void;
+  open: boolean;
 }
 
-const Modal: React.FC<ModalProps> = ({ children }) => {
-  const [category, setCategory] = React.useState<string>("");
-  const [reports, setReports] = React.useState<string>("");
-  const [file, setFile] = React.useState<File | null>(null);
-  const [description, setDescription] = React.useState<string>("");
+const Modal: React.FC<ModalProps> = ({ children, onClose, open }) => {
+  const [category, setCategory] = useState("");
+  const [reports, setReports] = useState("");
+  const [file, setFile] = useState<File | null>(null);
+  const [description, setDescription] = useState("");
 
   const handleReportsChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setReports(event.target.value);
@@ -31,8 +40,8 @@ const Modal: React.FC<ModalProps> = ({ children }) => {
   };
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = event.target.files && event.target.files[0];
-    setFile(selectedFile);
+    const selectedFile = event.target.files?.[0];
+    setFile(selectedFile || null);
   };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -46,27 +55,27 @@ const Modal: React.FC<ModalProps> = ({ children }) => {
     const form = new FormData();
     form.append("files", file);
 
-    uploadFile(form).then((resp: any) =>
-      sendReport({
-        category,
-        reports,
-        description,
-        media: resp[0],
-      })
-    );
+    // Call the necessary API functions here
+    // uploadFile(form).then((resp: any) =>
+    //   sendReport({
+    //     category,
+    //     reports,
+    //     description,
+    //     media: resp[0],
+    //   })
+    // );
   };
 
   return (
-    <div className={style.backdrop}>
-      <div className={style.modal}>
+    <Dialog onClose={onClose} maxWidth="xs" fullWidth open={open}>
+      <DialogTitle style={{ textAlign: "center" }}>{children}</DialogTitle>
+      <DialogContent>
         <form className={style.form} onSubmit={handleSubmit}>
-          <h2 className={style.title}>{children}</h2>
           <FormControl fullWidth>
             <InputLabel variant="standard" htmlFor="uncontrolled-native">
               Куда жалобу отправить
             </InputLabel>
             <NativeSelect
-              defaultValue={30}
               inputProps={{
                 name: "reports",
                 id: "reports",
@@ -87,7 +96,9 @@ const Modal: React.FC<ModalProps> = ({ children }) => {
               value={description}
               onChange={handleSubjectChange}
             />
-            <FormHelperText id="my-helper-text">Пример:[dasd]</FormHelperText>
+            <FormHelperText id="my-helper-text">
+              Пример:[Мусор на улице]
+            </FormHelperText>
           </FormControl>
           <div className={style.Reports}>
             Описания Жалобы
@@ -100,9 +111,10 @@ const Modal: React.FC<ModalProps> = ({ children }) => {
           {file && (
             <Image
               src={URL.createObjectURL(file)}
-              width={400}
-              alt="random"
+              width={350}
               height={150}
+              alt="random"
+              className={style.image}
             />
           )}
           <FilledInput
@@ -111,12 +123,15 @@ const Modal: React.FC<ModalProps> = ({ children }) => {
             placeholder="Доказательства 'Видео , Фото' фиксация"
             onChange={handleFileChange}
           />
-          <Button className={style.btn} type="submit">
-            Отправить Жалобу
-          </Button>
+          <DialogActions>
+            <Button onClick={onClose}>Отмена</Button>
+            <Button className={style.btn} type="submit">
+              Отправить Жалобу
+            </Button>
+          </DialogActions>
         </form>
-      </div>
-    </div>
+      </DialogContent>
+    </Dialog>
   );
 };
 

@@ -3,6 +3,7 @@ import { Button } from "@mui/material";
 import style from "./style.module.sass";
 import Image from "next/image";
 import Modal from "@/components/Modal";
+import Card from "./Card";
 
 interface ButtonProps {
   text: string;
@@ -15,29 +16,77 @@ const NewsPage = () => {
     data: [
       {
         title: "НОВОСТИ",
-        description: "loremasdaksodkasokdosakd",
+        description: "lorem",
         img: {
-          url: "/bgcard.png",
+          url: "./bgcard.png",
           alt: "novosty",
         },
-        date: "1213131",
+        date: "12.08.04",
+      },
+      {
+        title: "НОВОСТИ",
+        description: "lorem",
+        img: {
+          url: "./bgcard.png",
+          alt: "novosty",
+        },
+        date: "12.08.04",
+      },
+      {
+        title: "НОВОСТИ",
+        description: "lorem",
+        img: {
+          url: "./bgcard.png",
+          alt: "novosty",
+        },
+        date: "12.08.04",
+      },
+      {
+        title: "НОВОСТИ",
+        description: "lorem",
+        img: {
+          url: "./bgcard.png",
+          alt: "novosty",
+        },
+        date: "12.08.04",
+      },
+      {
+        title: "НОВОСТИ",
+        description: "lorem",
+        img: {
+          url: "./bgcard.png",
+          alt: "novosty",
+        },
+        date: "12.08.04",
+      },
+      {
+        title: "НОВОСТИ",
+        description: "lorem",
+        img: {
+          url: "./bgcard.png",
+          alt: "novosty",
+        },
+        date: "12.08.04",
       },
     ],
   });
   const [data, setData] = useState(activeButton.data);
+  const [show, setShow] = useState(false);
   const [showModal, setShowModal] = useState(false);
+
   const handleButtonChangeData = (button: ButtonProps) => {
     setActiveButton(button);
     setData(button.data);
   };
-  const handleButtonClickMore = (btn: ButtonProps) => {
-    console.log(btn);
-    console.log(btn.data);
-  };
   const handleButtonClickAddReport = () => {
-    setShowModal(!showModal);
+    setShow(!show);
   };
-
+  const handleButtonClickModal = () => {
+    setShowModal(true);
+  };
+  const closeButtonClickModal = () => {
+    setShowModal(false);
+  };
   const buttons: ButtonProps[] = [
     { text: "Все новости", data: [] },
     { text: "В кыргызстане", data: [] },
@@ -68,38 +117,23 @@ const NewsPage = () => {
       </div>
       <div className={style.News__cards}>
         {data.map((item: any, index: number) => (
-          <div className={style.News__card} key={index}>
-            <Image
-              className={style.News__card__bg}
-              src={data?.img?.url}
-              width={287}
-              height={466}
-              alt={data?.img?.alt}
-            />
-
-            <div className={style.News__card__date}>
-              <span>{item.date}</span>
-            </div>
-            <div className={style.News__card__info}>
-              <span>{item.title}</span>
-              <p>{item.description}</p>
-              <Button
-                variant="contained"
-                onClick={() => {
-                  handleButtonClickMore(item);
-                }}
-                className={style.News__card__info__btn}
-              >
-                Подробнее
-              </Button>
-            </div>
-          </div>
+          <Card
+            url={data?.img?.url}
+            alt={data?.img?.alt}
+            title={item?.title}
+            description={item?.description}
+            date={item?.date}
+            key={index}
+          />
         ))}
       </div>
       <div className={style.News__added}>
-        {showModal && (
+        {show && (
           <div className={style.News__added__modal}>
-            <Button className={style.News__added__modal__btn}>
+            <Button
+              onClick={handleButtonClickModal}
+              className={style.News__added__modal__btn}
+            >
               Оставить Жалобу
             </Button>
             <Button className={style.News__added__modal__btn}>
@@ -118,7 +152,9 @@ const NewsPage = () => {
           </Button>
         </div>
       </div>
-      <Modal>Оставьте жалобу для улучшения нашего города</Modal>
+      <Modal open={showModal} onClose={closeButtonClickModal}>
+        Оставьте жалобу для улучшения нашего города
+      </Modal>
     </div>
   );
 };

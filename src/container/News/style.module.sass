@@ -1,13 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap')
 .News
   background: white
-  width: 100%
   display: flex
   justify-content: center
   align-items: center
   padding: 20px
   flex-direction: column
   flex-wrap: nowrap
+  font-family: 'Ubuntu'
+
   &__div
     display: flex
     &__title
@@ -57,13 +58,20 @@
         background: #023047
         color: white
   &__cards
-    display: grid
-    grid-template-columns: 2fr 3fr 2fr
-    grid-template-rows: repeat(3, 1fr)
-    grid-column-gap: 20px
-    grid-row-gap: 20px
+    display: flex
+    flex-direction: row
+    gap: 30px
+    flex-wrap: wrap
+    width: 100%
+    justify-content: center
+    align-items: center
   &__card
-    &__bg
+    width: 100%
+    max-width: 700px
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+    background: #006bf7
     &__info
       &__btn
         width: 100%
