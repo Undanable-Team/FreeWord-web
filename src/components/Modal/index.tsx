@@ -14,6 +14,7 @@ import {
 } from "@mui/material";
 import style from "./style.module.sass";
 import Image from "next/image";
+import { sendReport } from "@/api";
 
 interface ModalProps {
   children: ReactNode | string;
@@ -46,6 +47,15 @@ const Modal: React.FC<ModalProps> = ({ children, onClose, open }) => {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    const sendReports = () => {
+      sendReport({
+        category,
+        reports,
+        description,
+        media: resp[0],
+      });
+    };
 
     if (!file) {
       // Handle error condition, file is required
@@ -125,7 +135,7 @@ const Modal: React.FC<ModalProps> = ({ children, onClose, open }) => {
           />
           <DialogActions>
             <Button onClick={onClose}>Отмена</Button>
-            <Button className={style.btn} type="submit">
+            <Button className={style.btn} onClick={setReports} type="submit">
               Отправить Жалобу
             </Button>
           </DialogActions>
