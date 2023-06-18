@@ -13,6 +13,8 @@ const ProfileUser = () => {
   const [name, setName] = useState<string>("Укиев Айдин Талантович");
   const [btnText, setBtnText] = useState<string>("Редактировать");
 
+  const [image, setImage] = useState<any>("/image/spiderman.jpg");
+
   const changehandle = (e: any) => {
     setEmail(e.target.value);
   };
@@ -26,6 +28,12 @@ const ProfileUser = () => {
 
   const sendChangeEmail = () => {
     setInput(!input);
+  };
+
+  const changeImgClick = () => {
+    const newImg =
+      "https://upload.wikimedia.org/wikipedia/ru/thumb/3/31/Tobey_Maguire_as_Spider-Man.jpeg/560px-Tobey_Maguire_as_Spider-Man.jpeg";
+    setImage(newImg);
   };
 
   return (
@@ -44,7 +52,7 @@ const ProfileUser = () => {
             alt="profile-user"
             className={styles.user_picture}
           />
-          <button className={styles.hover_blog}>
+          <button className={styles.hover_blog} onClick={changeImgClick}>
             <FaRegEdit className={styles.icon_edit} />
             Редактировать
           </button>
