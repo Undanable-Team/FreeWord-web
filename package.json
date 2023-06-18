@@ -1,5 +1,5 @@
 {
-  "name": "xz",
+  "name": "-",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -11,18 +11,29 @@
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+<<<<<<< HEAD
     "@material-ui/lab": "^4.0.0-alpha.61",
+=======
+>>>>>>> 46372c6270a7023b6556deed5f9a557530be3a5c
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.13.5",
+    "@mui/styles": "^5.13.2",
     "@types/node": "20.3.1",
     "@types/react": "18.2.12",
     "@types/react-dom": "18.2.5",
+    "clsx": "^1.2.1",
+    "cookies-js": "^1.2.3",
     "eslint": "8.43.0",
     "eslint-config-next": "13.4.6",
+    "ky": "^0.33.3",
     "next": "13.4.6",
-    "react": "18.2.0",
+    "react": "^18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.9.0",
+<<<<<<< HEAD
+=======
+    "react-media": "^1.10.0",
+>>>>>>> 46372c6270a7023b6556deed5f9a557530be3a5c
     "sass": "^1.63.4",
     "typescript": "5.1.3"
   }
