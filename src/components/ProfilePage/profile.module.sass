@@ -1,4 +1,5 @@
 .title_profile
+  margin-bottom: 40px
   position: relative
   text-align: center
   font-weight: 500
@@ -8,6 +9,7 @@
   display: flex
   gap: 45px
   max-width: max-content
+  align-items: center
 
 .user_img_blog
   position: relative
@@ -59,4 +61,27 @@
   &_group
     display: flex
     gap: 25px
-  
+
+.title_container
+  font-size: 16px
+
+@media screen and ( max-width: 770px )
+  .container
+    margin-top: 45px
+  .data_user
+    width: 100%
+    padding: 12px
+
+@media screen and ( max-width: 600px )
+  .data_user
+    display: flex
+    flex-direction: column
+    // justify-content: center
+    align-items: center
+    padding: 14px
+
+@media screen and ( max-width: 330px )
+  .data_user
+    padding: 14px
+  .input_data_group
+    padding: 14px

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { Button, Container, TextField } from "@mui/material";
 import styles from "./profile.module.sass";
@@ -40,7 +40,9 @@ const ProfileUser = () => {
 
   return (
     <Container
+      className={styles.container}
       sx={{
+        paddingTop: "50px",
         maxWidth: "1280px",
       }}
     >
@@ -64,14 +66,14 @@ const ProfileUser = () => {
             {chandeName && (
               <TextField
                 id="standard-basic"
-                label="Введите изменённый емайл"
+                label="Введите ФИО"
                 variant="standard"
                 // value="sdcsdc"
-                placeholder="Введите Email адрес"
+                placeholder="Введите ФИО"
                 onChange={changehandleNameUser}
               />
             )}
-            {!chandeName && <h3>{name}</h3>}
+            {!chandeName && <h3 className={styles.title_container}>{name}</h3>}
             <Button variant="contained" onClick={sendChangeName}>
               {!chandeName ? "Редактировать" : "Сохранить"}
             </Button>
@@ -87,8 +89,8 @@ const ProfileUser = () => {
                 onChange={changehandle}
               />
             )}
-            {!input && <h3>{email}</h3>}
-            <Button variant="contained" onClick={sendChangeEmail}>
+            {!input && <h3 className={styles.title_container}>{email}</h3>}
+            <Button variant="contained">
               {!input ? "Редактировать" : "Сохранить"}
             </Button>
           </div>
