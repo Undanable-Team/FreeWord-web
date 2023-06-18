@@ -1,7 +1,8 @@
-import Profile from "@/components/Profile/profile";
+import Profile from "../../components/ProfilePage/index";
+import ProfileUser from "@/components/ProfilePage";
 
 const profile = () => {
-  return <Profile/>
+  return <ProfileUser />;
 };
 
 export default profile;

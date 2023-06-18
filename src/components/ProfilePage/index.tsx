@@ -1,3 +1,5 @@
+"use client"
+
 import { Button, Container, TextField } from "@mui/material";
 import styles from "./profile.module.sass";
 import Image from "next/image";
