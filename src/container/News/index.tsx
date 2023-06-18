@@ -1,82 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@mui/material";
 import style from "./style.module.sass";
 import Image from "next/image";
 import Modal from "@/components/Modal";
 import Card from "./Card";
+import { getData } from "@/api";
 
 interface ButtonProps {
   text: string;
-  data: any;
+  data?: any;
 }
 
 const NewsPage = () => {
+  const [database, setDatabase] = useState<any[]>([]);
+  console.log(database);
+
   const [activeButton, setActiveButton] = useState<ButtonProps>({
     text: "Все новости",
-    data: [
-      {
-        title: "НОВОСТИ",
-        description: "lorem",
-        img: {
-          url: "./bgcard.png",
-          alt: "novosty",
-        },
-        date: "12.08.04",
-      },
-      {
-        title: "НОВОСТИ",
-        description: "lorem",
-        img: {
-          url: "./bgcard.png",
-          alt: "novosty",
-        },
-        date: "12.08.04",
-      },
-      {
-        title: "НОВОСТИ",
-        description: "lorem",
-        img: {
-          url: "./bgcard.png",
-          alt: "novosty",
-        },
-        date: "12.08.04",
-      },
-      {
-        title: "НОВОСТИ",
-        description: "lorem",
-        img: {
-          url: "./bgcard.png",
-          alt: "novosty",
-        },
-        date: "12.08.04",
-      },
-      {
-        title: "НОВОСТИ",
-        description: "lorem",
-        img: {
-          url: "./bgcard.png",
-          alt: "novosty",
-        },
-        date: "12.08.04",
-      },
-      {
-        title: "НОВОСТИ",
-        description: "lorem",
-        img: {
-          url: "./bgcard.png",
-          alt: "novosty",
-        },
-        date: "12.08.04",
-      },
-    ],
+    data: database,
   });
-  const [data, setData] = useState(activeButton.data);
   const [show, setShow] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
   const handleButtonChangeData = (button: ButtonProps) => {
     setActiveButton(button);
-    setData(button.data);
+    setDatabase(button.data);
   };
   const handleButtonClickAddReport = () => {
     setShow(!show);
@@ -87,12 +35,20 @@ const NewsPage = () => {
   const closeButtonClickModal = () => {
     setShowModal(false);
   };
+  console.log(database);
+
   const buttons: ButtonProps[] = [
-    { text: "Все новости", data: [] },
+    { text: "Все новости" },
     { text: "В кыргызстане", data: [] },
     { text: "Экономика", data: [] },
     { text: "Политика", data: [] },
   ];
+
+  useEffect(() => {
+    getData().then((res: any) => {
+      setDatabase(res.data);
+    });
+  }, []);
 
   return (
     <>
@@ -117,17 +73,19 @@ const NewsPage = () => {
           ))}
         </div>
         <div className={style.News__cards}>
-          {data.map((item: any, index: number) => (
-            <Card
-              url={data?.img?.url}
-              alt={data?.img?.alt}
-              title={item?.title}
-              description={item?.description}
-              date={item?.date}
-              key={index}
-            />
-          ))}
+          {database &&
+            database.map((item: any, index: number) => (
+              <Card
+                url={item?.attributes?.media?.data?.attributes?.url}
+                alt={item?.attributes?.media?.data?.attributes?.name}
+                title={item?.attributes?.title}
+                description={item?.attributes?.description}
+                date={item?.attributes?.publishedAt}
+                key={index}
+              />
+            ))}
         </div>
+
         <div className={style.News__added}>
           {show && (
             <div className={style.News__added__modal}>

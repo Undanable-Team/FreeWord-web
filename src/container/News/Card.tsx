@@ -50,7 +50,7 @@ const MultiActionAreaCard: React.FC<MultiActionAreaCardProps> = ({
 
   return (
     <>
-      <Card sx={{ width: 345 }}>
+      <Card sx={{ width: 450 }}>
         <CardActionArea onClick={handleOpen}>
           <CardMedia component="img" height="140" image={url} alt={alt} />
           <CardContent>
